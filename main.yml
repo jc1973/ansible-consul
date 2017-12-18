@@ -1,0 +1,9 @@
+---
+# This playbook deploys jenkins seed box
+
+- name: install consul and envconsul
+  hosts: all
+  become: true
+  remote_user: root
+  roles:
+    - consul

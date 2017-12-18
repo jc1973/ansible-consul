@@ -1,0 +1,14 @@
+---
+
+consul:
+  version: 1.0.1
+  url: https://releases.hashicorp.com/consul
+
+envconsul:
+  version: 0.7.2
+  url: https://releases.hashicorp.com/envconsul
+
+
+# https://releases.hashicorp.com/envconsul/
+# https://releases.hashicorp.com/envconsul/0.7.2/envconsul_0.7.2_linux_amd64.zip
+# https://releases.hashicorp.com/consul/1.0.1/consul_1.0.1_linux_amd64.zip

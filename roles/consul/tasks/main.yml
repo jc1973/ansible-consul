@@ -1,0 +1,58 @@
+---
+# This playbook installs consul and envconsul
+
+# make sure zip / unzip is installed
+
+- name: install zip
+  yum: name=zip state=present
+  when: ansible_os_family == "RedHat"
+
+- name: install unzip
+  yum: name=unzip state=present
+  when: ansible_os_family == "RedHat"
+
+- name: install zip
+  apt: name=zip state=present
+  when: ansible_os_family == "Debian"
+
+- name: install unzip
+  apt: name=unzip state=present
+  when: ansible_os_family == "Debian"
+
+- name: Download consul {{ consul.version }}
+  get_url:
+    url: "{{ consul.url }}/{{ consul.version }}/consul_{{ consul.version }}_linux_amd64.zip"
+    dest: /var/tmp/consul.zip
+    mode: 0644
+
+#   TASK consul : unzip consul to /usr/local/bin
+#   WARNING: Consider using unarchive module rather than running unzip
+# - name: unzip consul to /usr/local/bin
+#   shell: unzip /var/tmp/consul.zip -d /usr/local/bin
+
+- name: extract consul
+  unarchive:
+    src: /var/tmp/consul.zip
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Download envconsul {{ envconsul.version }}
+  get_url:
+    url: "{{ envconsul.url }}/{{ envconsul.version }}/envconsul_{{ envconsul.version }}_linux_amd64.zip"
+    dest: /var/tmp/envconsul.zip
+    mode: 0644
+
+#   TASK envconsul : unzip envconsul to /usr/local/bin
+#   WARNING: Consider using unarchive module rather than running unzip
+# - name: unzip envconsul to /usr/local/bin
+#   shell: unzip /var/tmp/envconsul.zip -d /usr/local/bin
+
+- name: extract envconsul
+  unarchive:
+    src: /var/tmp/envconsul.zip
+    dest: /usr/local/bin
+    remote_src: yes
+
+
+
+
